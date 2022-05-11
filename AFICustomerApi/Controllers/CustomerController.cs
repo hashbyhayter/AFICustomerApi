@@ -4,9 +4,11 @@
     using AFICustomerApi.Utilities;
     using AFICustomerApi.Validation;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.AspNetCore.Mvc.ModelBinding;
     using Swashbuckle.AspNetCore.Annotations;
 
+    /// <summary>
+    /// Controller for the customer endpoint
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
@@ -14,6 +16,11 @@
         private readonly IValidator<Customer> validator;
         private readonly CustomerContext db;
 
+        /// <summary>
+        /// Constructor for <see cref="CustomerController"/>
+        /// </summary>
+        /// <param name="validator">A validator for a customer record</param>
+        /// <param name="db">The databas context</param>
         public CustomerController(IValidator<Customer> validator,
             CustomerContext db)
         {
@@ -21,11 +28,10 @@
             this.db = db;
         }
 
-        // POST api/<CustomerController>
         /// <summary>
-        /// validates and inserts a customer record
+        /// Creates a new customer record
         /// </summary>
-        /// <param name="value">the customer details</param>
+        /// <param name="value">Customer details</param>
         /// <returns>the inserted customer id</returns>
         [HttpPost]
         [SwaggerResponse(201, "Customer created", typeof(int))]
@@ -43,7 +49,7 @@
                 FirstName = value.FirstName,
                 Surname = value.Surname,
                 PolicyReference = value.PolicyReference,
-                DateOfBirth = value.DateOfBirth,
+                DateOfBirth = value.DateOfBirth?.Date,
                 Email = value.Email,
             });
 

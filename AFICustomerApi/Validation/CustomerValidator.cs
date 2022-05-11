@@ -1,10 +1,10 @@
-﻿using System.Text.RegularExpressions;
-using AFICustomerApi.Model;
-using AFICustomerApi.Utilities;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
-
-namespace AFICustomerApi.Validation
+﻿namespace AFICustomerApi.Validation
 {
+    using System.Text.RegularExpressions;
+    using AFICustomerApi.Model;
+    using AFICustomerApi.Utilities;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
+
     public class CustomerValidator : IValidator<Customer>
     {
         private readonly IDateTimeService dateTimeService;
@@ -14,6 +14,11 @@ namespace AFICustomerApi.Validation
             this.dateTimeService = dateTimeService;
         }
 
+        /// <summary>
+        /// Validator for a customer model
+        /// </summary>
+        /// <param name="value">the customer</param>
+        /// <returns>A collection of validation errors if there are any</returns>
         public ModelStateDictionary Validate(Customer value)
         {
             var state = new ModelStateDictionary();

@@ -29,12 +29,14 @@ namespace AFICustomerApi.Model
         public string? PolicyReference { get; set; }
         
         /// <summary>
-        /// Customer's date of birth
+        /// Customer's date of birth.
+        /// The customer must be at least 18 years old.
         /// </summary>
         public DateTime? DateOfBirth { get; set; }
-        
+
         /// <summary>
-        /// Customer's email address
+        /// Customer's email address.
+        /// It must end with either .co.uk or .com and have at least 4 character before the domain.
         /// </summary>
         public string? Email { get; set; }
     }

@@ -4,11 +4,23 @@
         <name>AFICustomerApi</name>
     </assembly>
     <members>
+        <member name="T:AFICustomerApi.Controllers.CustomerController">
+            <summary>
+            Controller for the customer endpoint
+            </summary>
+        </member>
+        <member name="M:AFICustomerApi.Controllers.CustomerController.#ctor(AFICustomerApi.Validation.IValidator{AFICustomerApi.Model.Customer},AFICustomerApi.Utilities.CustomerContext)">
+            <summary>
+            Constructor for <see cref="T:AFICustomerApi.Controllers.CustomerController"/>
+            </summary>
+            <param name="validator">A validator for a customer record</param>
+            <param name="db">The databas context</param>
+        </member>
         <member name="M:AFICustomerApi.Controllers.CustomerController.Post(AFICustomerApi.Model.Customer)">
             <summary>
-            validates and inserts a customer record
+            Creates a new customer record
             </summary>
-            <param name="value">the customer details</param>
+            <param name="value">Customer details</param>
             <returns>the inserted customer id</returns>
         </member>
         <member name="T:AFICustomerApi.Model.Customer">
@@ -36,12 +48,59 @@
         </member>
         <member name="P:AFICustomerApi.Model.Customer.DateOfBirth">
             <summary>
-            Customer's date of birth
+            Customer's date of birth.
+            The customer must be at least 18 years old.
             </summary>
         </member>
         <member name="P:AFICustomerApi.Model.Customer.Email">
             <summary>
-            Customer's email address
+            Customer's email address.
+            It must end with either .co.uk or .com and have at least 4 character before the domain.
+            </summary>
+        </member>
+        <member name="T:AFICustomerApi.Model.DTO.Customer">
+            <summary>
+            Customer record
+            </summary>
+        </member>
+        <member name="P:AFICustomerApi.Model.DTO.Customer.CustomerId">
+            <summary>
+            The customer id
+            </summary>
+        </member>
+        <member name="P:AFICustomerApi.Model.DTO.Customer.FirstName">
+            <summary>
+            The customer's first name
+            </summary>
+        </member>
+        <member name="P:AFICustomerApi.Model.DTO.Customer.Surname">
+            <summary>
+            The customer's surname
+            </summary>
+        </member>
+        <member name="P:AFICustomerApi.Model.DTO.Customer.PolicyReference">
+            <summary>
+            The customer's policy reference
+            </summary>
+        </member>
+        <member name="P:AFICustomerApi.Model.DTO.Customer.DateOfBirth">
+            <summary>
+            The customer's date of birth
+            </summary>
+        </member>
+        <member name="P:AFICustomerApi.Model.DTO.Customer.Email">
+            <summary>
+            The customer's email address
+            </summary>
+        </member>
+        <member name="T:AFICustomerApi.Utilities.CustomerContext">
+            <summary>
+            Database context for the customer database
+            </summary>
+        </member>
+        <member name="P:AFICustomerApi.Utilities.CustomerContext.Customers">
+            <summary>
+            Customer records
             </summary>
         </member>
         <member name="P:AFICustomerApi.Utilities.DateTimeService.Now">
@@ -63,6 +122,20 @@
             <summary>
             Returns DateTime.Today
             </summary>
+        </member>
+        <member name="M:AFICustomerApi.Validation.CustomerValidator.Validate(AFICustomerApi.Model.Customer)">
+            <summary>
+            Validator for a customer model
+            </summary>
+            <param name="value">the customer</param>
+            <returns>A collection of validation errors if there are any</returns>
+        </member>
+        <member name="M:AFICustomerApi.Validation.IValidator`1.Validate(`0)">
+            <summary>
+            Validates that the request object <typeparamref name="T"/> has no errors
+            </summary>
+            <param name="value">The request object</param>
+            <returns>a collection of validation errors if there are any</returns>
         </member>
     </members>
 </doc>
