@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AFICustomerApi</name>
+    </assembly>
+    <members>
+        <member name="M:AFICustomerApi.Controllers.CustomerController.Post(AFICustomerApi.Model.Customer)">
+            <summary>
+            validates and inserts a customer record
+            </summary>
+            <param name="value">the customer details</param>
+            <returns>the inserted customer id</returns>
+        </member>
+        <member name="T:AFICustomerApi.Model.Customer">
+            <summary>
+            Request object for a customer.
+            <remarks>
+            Either date of birth or email must be set
+            </remarks>
+            </summary>
+        </member>
+        <member name="P:AFICustomerApi.Model.Customer.FirstName">
+            <summary>
+            Customer's first name
+            </summary>
+        </member>
+        <member name="P:AFICustomerApi.Model.Customer.Surname">
+            <summary>
+            Customer's surname
+            </summary>
+        </member>
+        <member name="P:AFICustomerApi.Model.Customer.PolicyReference">
+            <summary>
+            Customer's policy reference
+            </summary>
+        </member>
+        <member name="P:AFICustomerApi.Model.Customer.DateOfBirth">
+            <summary>
+            Customer's date of birth
+            </summary>
+        </member>
+        <member name="P:AFICustomerApi.Model.Customer.Email">
+            <summary>
+            Customer's email address
+            </summary>
+        </member>
+        <member name="P:AFICustomerApi.Utilities.DateTimeService.Now">
+            <summary>
+            Returns DateTime.Now
+            </summary>
+        </member>
+        <member name="P:AFICustomerApi.Utilities.DateTimeService.Today">
+            <summary>
+            Returns DateTime.Today
+            </summary>
+        </member>
+        <member name="P:AFICustomerApi.Utilities.IDateTimeService.Now">
+            <summary>
+            Returns DateTime.Now
+            </summary>
+        </member>
+        <member name="P:AFICustomerApi.Utilities.IDateTimeService.Today">
+            <summary>
+            Returns DateTime.Today
+            </summary>
+        </member>
+    </members>
+</doc>

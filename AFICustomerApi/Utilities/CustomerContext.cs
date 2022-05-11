@@ -3,11 +3,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AFICustomerApi.Utilities
 {
-    public class CustomerDbContext : DbContext
+    public class CustomerContext : DbContext
     {
         public DbSet<Customer> Customers { get; set; }
 
-        public CustomerDbContext(DbContextOptions<CustomerDbContext> options)
+        public CustomerContext(DbContextOptions<CustomerContext> options)
             : base(options)
         {
         }

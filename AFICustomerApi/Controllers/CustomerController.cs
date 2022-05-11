@@ -4,37 +4,32 @@
     using AFICustomerApi.Utilities;
     using AFICustomerApi.Validation;
     using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.ModelBinding;
+    using Swashbuckle.AspNetCore.Annotations;
 
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
         private readonly IValidator<Customer> validator;
-        private readonly CustomerDbContext db;
+        private readonly CustomerContext db;
 
         public CustomerController(IValidator<Customer> validator,
-            CustomerDbContext db)
+            CustomerContext db)
         {
             this.validator = validator;
             this.db = db;
         }
 
-        // GET: api/<CustomerController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<CustomerController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
         // POST api/<CustomerController>
+        /// <summary>
+        /// validates and inserts a customer record
+        /// </summary>
+        /// <param name="value">the customer details</param>
+        /// <returns>the inserted customer id</returns>
         [HttpPost]
+        [SwaggerResponse(201, "Customer created", typeof(int))]
+        [SwaggerResponse(400, "Validation failed", typeof(Object))]
         public ActionResult<int> Post([FromBody] Customer value)
         {
             ModelState.Merge(this.validator.Validate(value));
@@ -54,13 +49,7 @@
 
             this.db.SaveChanges();
 
-            return customer.Entity.CustomerId;
-        }
-
-        // PUT api/<CustomerController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
+            return Created(string.Format("api/customer/{0}", customer.Entity.CustomerId), customer.Entity.CustomerId);
         }
     }
 }
