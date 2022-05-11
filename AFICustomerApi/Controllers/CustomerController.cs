@@ -1,6 +1,5 @@
 ﻿namespace AFICustomerApi.Controllers
 {
-    using System.Text.RegularExpressions;
     using AFICustomerApi.Model;
     using AFICustomerApi.Utilities;
     using AFICustomerApi.Validation;
@@ -11,10 +10,13 @@
     public class CustomerController : ControllerBase
     {
         private readonly IValidator<Customer> validator;
+        private readonly CustomerDbContext db;
 
-        public CustomerController(IValidator<Customer> validator)
+        public CustomerController(IValidator<Customer> validator,
+            CustomerDbContext db)
         {
-            this.validator = validator;   
+            this.validator = validator;
+            this.db = db;
         }
 
         // GET: api/<CustomerController>
@@ -41,8 +43,18 @@
                 return BadRequest(ModelState);
             }
 
-            // datebase insert here
-            return 1;
+            var customer = this.db.Customers.Add(new Model.DTO.Customer
+            {
+                FirstName = value.FirstName,
+                Surname = value.Surname,
+                PolicyReference = value.PolicyReference,
+                DateOfBirth = value.DateOfBirth,
+                Email = value.Email,
+            });
+
+            this.db.SaveChanges();
+
+            return customer.Entity.CustomerId;
         }
 
         // PUT api/<CustomerController>/5
