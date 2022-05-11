@@ -35,7 +35,7 @@
             ModelState.Merge(this.validator.Validate(value));
             if (!ModelState.IsValid)
             {
-                return BadRequest(ModelState);
+                return ValidationProblem(ModelState);
             }
 
             var customer = this.db.Customers.Add(new Model.DTO.Customer
